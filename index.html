@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denis Ferreira | Dev Full Stack</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS GERAL --- */
+        :root {
+            --bg-color: #09090a;
+            --card-bg: #121214;
+            --white: #e1e1e6;
+            --gray: #a8a8b3;
+            --accent: #8257e5; 
+            --accent-glow: rgba(130, 87, 229, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body { background: var(--bg-color); color: var(--white); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .subtitle, .tech-stack span, .company, .logo, .email-text { font-family: 'Fira Code', monospace; }
+
+        /* Navbar */
+        .navbar { 
+            display: flex; justify-content: space-between; padding: 30px 8%; align-items: center; 
+            position: fixed; width: 100%; top: 0; z-index: 100; transition: 0.3s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(18, 18, 20, 0.95);
+            box-shadow: 0 4px 20px rgba(130, 87, 229, 0.15);
+            padding: 20px 8%; border-bottom: 1px solid #202024;
+        }
+        .navbar ul { display: flex; list-style: none; gap: 30px; }
+        .navbar a { color: var(--gray); text-decoration: none; font-size: 14px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .navbar a:hover { color: var(--accent); text-shadow: 0 0 5px var(--accent-glow); }
+        .logo { font-weight: 700; letter-spacing: -1px; } .logo b { color: var(--accent); }
+
+        /* --- HERO SECTION --- */
+        .hero { 
+            min-height: 100vh; display: flex; align-items: center; padding: 120px 8% 50px; 
+            background: radial-gradient(circle at 90% 10%, rgba(130, 87, 229, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 10% 90%, rgba(130, 87, 229, 0.05) 0%, var(--bg-color) 100%);
+        }
+
+        .hero-wrapper {
+            display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%;
+        }
+
+        .subtitle { color: var(--accent); background: rgba(130, 87, 229, 0.1); padding: 5px 10px; border-radius: 4px; display: inline-block; font-size: 14px; font-weight: 500; margin-bottom: 25px; }
+        .typing-text::after { content: '_'; animation: blink 1s infinite; color: var(--accent); }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.1; font-weight: 900; margin-bottom: 25px; }
+        .outline { -webkit-text-stroke: 1px var(--white); color: transparent; text-shadow: 0 0 20px rgba(255,255,255, 0.1); }
+        .hero-desc { color: var(--gray); max-width: 550px; font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
+
+        
+        .hero-image-container {
+            width: 320px;       
+            height: 320px;
+            border-radius: 30px;
+            
+            /* Borda Roxa e Neon */
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 30px rgba(130, 87, 229, 0.3), inset 0 0 20px rgba(130, 87, 229, 0.2);
+            
+            overflow: hidden;   
+            margin: 0 auto;     
+            position: relative;
+            transition: 0.5s ease;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            
+            /* ZOOM: Aumenta a foto */
+            transform: scale(1.6); 
+            
+            /* POSIÇÃO: center 35% foca mais acima (te sobe na foto) */
+            object-position: center 35%; 
+            
+            transition: 0.5s ease;
+        }
+
+        .hero-image-container:hover {
+            box-shadow: 0 0 60px rgba(130, 87, 229, 0.6);
+            transform: translateY(-5px);
+        }
+
+        /* --- BOTÕES --- */
+        .actions { display: flex; align-items: center; }
+        .btn-main { background: var(--accent); color: #fff; padding: 18px 40px; text-decoration: none; font-weight: 700; border-radius: 4px; transition: 0.3s; box-shadow: 0 0 15px var(--accent-glow); text-transform: uppercase; font-size: 14px; letter-spacing: 1px; }
+        .btn-main:hover { background: #966bf2; box-shadow: 0 0 25px var(--accent); }
+        
+        /* Botão Secundário (Estilo Roxo Tech) */
+        .btn-sub { background: #202024; color: var(--gray); padding: 18px 40px; text-decoration: none; margin-left: 20px; border: 1px solid #29292e; border-radius: 4px; font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; transition: 0.3s; }
+        .btn-sub:hover { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 15px rgba(130, 87, 229, 0.15); }
+
+        /* --- SECTIONS --- */
+        .section { padding: 120px 8%; }
+        .line { width: 50px; height: 3px; background: var(--accent); display: block; margin-bottom: 20px; box-shadow: 0 0 10px var(--accent); }
+        h2 { font-size: 2.5rem; margin-bottom: 30px; }
+        .section p { font-size: 1.2rem; color: var(--gray); max-width: 800px; line-height: 1.6; }
+
+        /* Cards */
+        .job-card { background: var(--card-bg); padding: 40px; border-left: 2px solid var(--accent); border-top: 1px solid #202024; border-right: 1px solid #202024; border-bottom: 1px solid #202024; margin-bottom: 30px; border-radius: 4px; transition: transform 0.3s, border-color 0.3s; position: relative; overflow: hidden; }
+        .job-card:hover { transform: translateY(-5px); border-color: #9d4edd; }
+        .job-card h3 { font-size: 1.5rem; margin-bottom: 5px; color: var(--white); }
+        .company { display: block; color: var(--accent); font-size: 0.9rem; margin-bottom: 15px; }
+        .tech-stack { margin-top: 25px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .tech-stack span { background: #202024; color: var(--gray); padding: 6px 14px; border-radius: 4px; font-size: 0.8rem; border: 1px solid #29292e; transition: 0.3s; }
+        .tech-stack span:hover { color: var(--accent); border-color: var(--accent); }
+        .previous-job { opacity: 0.7; border-left: 2px solid #29292e; }
+
+        /* Footer */
+        .footer { background: #09090a; padding: 80px 8% 20px; border-top: 1px solid #202024; margin-top: 50px; text-align: center; }
+        .footer-container { display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; }
+        .social-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 15px; }
+        .social-links a { width: 55px; height: 55px; background: #121214; border: 1px solid #202024; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--white); text-decoration: none; transition: 0.3s; font-size: 1.4rem; }
+        .social-links a:hover { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); transform: translateY(-5px); }
+        .email-text { margin-top: 10px; font-size: 0.8rem; color: var(--gray); }
+        .footer-bottom { padding-top: 20px; border-top: 1px solid #202024; color: #444; font-size: 0.8rem; }
+        
+        /* Mobile */
+        @media (max-width: 968px) {
+            .hero-wrapper { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .hero-text { order: 2; } 
+            .hero-image-container { order: 1; width: 250px; height: 250px; } /* Foto menor no celular */
+            .hero-desc { margin: 0 auto 40px; }
+            .actions { justify-content: center; flex-direction: column; gap: 15px; }
+            .btn-sub { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">DENIS <b>FERREIRA</b></div>
+        <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#experiencia">XP</a></li> 
+            <li><a href="https://www.linkedin.com/in/denisfcastro/" target="_blank">LinkedIn</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-wrapper">
+            <div class="hero-text" data-aos="fade-right">
+                <span class="subtitle">System.out.print("Hello World"), <span class="typing-text"></span></span>
+                <h1>Engenharia de Software & <br> <span class="outline">Alta Performance.</span></h1>
+                <p class="hero-desc">Desenvolvedor Full Stack focado em escalabilidade. Especialista em construir ecossistemas robustos com Java, Spring Boot e SQL.</p>
+                <div class="actions">
+                    <a href="#experiencia" class="btn-main">Ver Projetos</a>
+                    <a href="#contato" class="btn-sub"> Vamos Conversar?</a>
+                </div>
+            </div>
+
+            <div data-aos="fade-left">
+                <div class="hero-image-container">
+                    <img src="perfil.jpg" alt="Foto de Denis Ferreira">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="sobre" class="section" data-aos="fade-up">
+        <div class="container">
+            <span class="line"></span>
+            <h2>Stack & Sobre</h2>
+            <p>Desenvolvedor de software com mais de 2 anos de experiência. Minha principal atuação é utilizando tecnologias como Java Hibernate, JSF, PrimeFaces e SQL para construir soluções robustas e eficientes, sempre aplicando o padrão MVC.
+            Além da minha experiência profissional, possuo uma base sólida em tecnologias modernas como Angular, Spring Boot e Flutter, desenvolvida através de projetos e atividades acadêmicos.</p>
+            
+            <div class="tech-stack" style="margin-top: 30px;">
+                <span style="border-color: var(--accent); color: var(--accent)">Java</span>
+                <span>Spring Boot</span>
+                <span>SQL / Postgres</span>
+                <span>Angular</span>
+                <span>Flutter</span>
+                <span>PrimeFaces</span>
+                <span>JSF</span>
+                <span>Maven</span>
+                <span>Jboss</span>
+                <span>JavaEE</span>
+                <span>Hibernate</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="experiencia" class="section" data-aos="fade-up">
+        <div class="container">
+            <span class="line"></span>
+            <h2>Experiência Profissional</h2>
+            
+            <div class="job-card">
+                <h3>Desenvolvedor Júnior</h3>
+                <span class="company">Du Gregório | Jun 2023 - Atualmente</span>
+                <p>Atuação Full Stack no ecossistema de ERP. Foco total em performance e código limpo.</p>
+                <div class="tech-stack">
+                    <span>Java 8</span>
+                    <span>PostgreSQL</span>
+                    <span>Hibernate</span>
+                    <span>JSF</span>
+                    <span>Maven</span>
+                </div>
+            </div>
+
+            <div class="job-card previous-job">
+                <h3>Carreira Prévia</h3>
+                <span class="company">Polisaude & Brainfarma</span>
+                <p>Background sólido em processos administrativos e soft skills de comunicação corporativa.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contato">
+        <div class="footer-container">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/denisfcastro/" target="_blank"><i class="ri-linkedin-fill"></i></a>
+        
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=denisferreira712@gmail.com" target="_blank">
+                    <i class="ri-mail-send-fill"></i>
+                </a>
+
+                <a href="https://github.com/denisfcastro" target="_blank"><i class="ri-github-fill"></i></a>
+            </div>
+
+            <p class="email-text">
+              denisferreira712@gmail.com
+            </p>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Denis Ferreira. Todos os diretos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>AOS.init({duration: 1000, once: true});</script>
+</body>
+</html>

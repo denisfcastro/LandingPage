@@ -1,0 +1,141 @@
+/* --- CSS GERAL --- */
+:root {
+    --bg-color: #09090a;
+    --card-bg: #121214;
+    --white: #e1e1e6;
+    --gray: #a8a8b3;
+    
+    /* ROXO TECH */
+    --accent: #8257e5; 
+    --accent-glow: rgba(130, 87, 229, 0.4);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+body { background: var(--bg-color); color: var(--white); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+/* Fontes Mono para detalhes técnicos */
+.subtitle, .tech-stack span, .company, .logo, .email-text { font-family: 'Fira Code', monospace; }
+
+/* --- NAVBAR --- */
+.navbar { 
+    display: flex; justify-content: space-between; padding: 30px 8%; align-items: center; 
+    position: fixed; width: 100%; top: 0; z-index: 100; transition: 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(18, 18, 20, 0.95);
+    box-shadow: 0 4px 20px rgba(130, 87, 229, 0.15);
+    padding: 20px 8%; border-bottom: 1px solid #202024;
+}
+
+.navbar ul { display: flex; list-style: none; gap: 30px; }
+.navbar a { color: var(--gray); text-decoration: none; font-size: 14px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+.navbar a:hover { color: var(--accent); text-shadow: 0 0 5px var(--accent-glow); }
+
+.logo { font-weight: 700; letter-spacing: -1px; } 
+.logo b { color: var(--accent); }
+
+/* --- HERO SECTION --- */
+.hero { 
+    min-height: 100vh; display: flex; align-items: center; padding: 120px 8% 50px; 
+    background: radial-gradient(circle at 90% 10%, rgba(130, 87, 229, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 10% 90%, rgba(130, 87, 229, 0.05) 0%, var(--bg-color) 100%);
+}
+
+.hero-wrapper {
+    display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%;
+}
+
+.subtitle { color: var(--accent); background: rgba(130, 87, 229, 0.1); padding: 5px 10px; border-radius: 4px; display: inline-block; font-size: 14px; font-weight: 500; margin-bottom: 25px; }
+
+.typing-text::after { content: '_'; animation: blink 1s infinite; color: var(--accent); }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.1; font-weight: 900; margin-bottom: 25px; }
+.outline { -webkit-text-stroke: 1px var(--white); color: transparent; text-shadow: 0 0 20px rgba(255,255,255, 0.1); }
+.hero-desc { color: var(--gray); max-width: 550px; font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
+
+/* --- FOTO COM ZOOM E POSIÇÃO CORRIGIDA --- */
+.hero-image-container {
+    width: 320px;       
+    height: 320px;
+    border-radius: 30px;
+    
+    /* Borda e Neon */
+    border: 3px solid var(--accent);
+    box-shadow: 0 0 30px rgba(130, 87, 229, 0.3), inset 0 0 20px rgba(130, 87, 229, 0.2);
+    
+    overflow: hidden;   
+    margin: 0 auto;     
+    position: relative;
+    transition: 0.5s ease;
+}
+
+/* --- AJUSTE DE POSIÇÃO (SUBIR NA FOTO) --- */
+
+.hero-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+    /* ZOOM: Mantido em 1.6x */
+    transform: scale(1.6); 
+    
+    /* POSIÇÃO: Mudamos de 35% para 20%.
+       Isso foca bem no topo da imagem, fazendo você "subir" no quadro. */
+    object-position: center 10%; 
+    
+    transition: 0.5s ease;
+}
+
+.hero-image-container:hover {
+    box-shadow: 0 0 60px rgba(130, 87, 229, 0.6);
+    transform: translateY(-5px);
+}
+
+/* --- BOTÕES --- */
+.actions { display: flex; align-items: center; }
+
+.btn-main { background: var(--accent); color: #fff; padding: 18px 40px; text-decoration: none; font-weight: 700; border-radius: 4px; transition: 0.3s; box-shadow: 0 0 15px var(--accent-glow); text-transform: uppercase; font-size: 14px; letter-spacing: 1px; }
+.btn-main:hover { background: #966bf2; box-shadow: 0 0 25px var(--accent); }
+
+.btn-sub { background: #202024; color: var(--gray); padding: 18px 40px; text-decoration: none; margin-left: 20px; border: 1px solid #29292e; border-radius: 4px; font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; transition: 0.3s; }
+.btn-sub:hover { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 15px rgba(130, 87, 229, 0.15); }
+
+/* --- SECTIONS --- */
+.section { padding: 120px 8%; }
+.line { width: 50px; height: 3px; background: var(--accent); display: block; margin-bottom: 20px; box-shadow: 0 0 10px var(--accent); }
+h2 { font-size: 2.5rem; margin-bottom: 30px; }
+.section p { font-size: 1.2rem; color: var(--gray); max-width: 800px; line-height: 1.6; }
+
+/* --- CARDS --- */
+.job-card { background: var(--card-bg); padding: 40px; border-left: 2px solid var(--accent); border-top: 1px solid #202024; border-right: 1px solid #202024; border-bottom: 1px solid #202024; margin-bottom: 30px; border-radius: 4px; transition: transform 0.3s, border-color 0.3s; position: relative; overflow: hidden; }
+.job-card:hover { transform: translateY(-5px); border-color: #9d4edd; }
+.job-card h3 { font-size: 1.5rem; margin-bottom: 5px; color: var(--white); }
+.company { display: block; color: var(--accent); font-size: 0.9rem; margin-bottom: 15px; }
+
+.tech-stack { margin-top: 25px; display: flex; gap: 10px; flex-wrap: wrap; }
+.tech-stack span { background: #202024; color: var(--gray); padding: 6px 14px; border-radius: 4px; font-size: 0.8rem; border: 1px solid #29292e; transition: 0.3s; }
+.tech-stack span:hover { color: var(--accent); border-color: var(--accent); }
+
+.previous-job { opacity: 0.7; border-left: 2px solid #29292e; }
+
+/* --- FOOTER --- */
+.footer { background: #09090a; padding: 80px 8% 20px; border-top: 1px solid #202024; margin-top: 50px; text-align: center; }
+.footer-container { display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; }
+.social-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 15px; }
+.social-links a { width: 55px; height: 55px; background: #121214; border: 1px solid #202024; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--white); text-decoration: none; transition: 0.3s; font-size: 1.4rem; }
+.social-links a:hover { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); transform: translateY(-5px); }
+.email-text { margin-top: 10px; font-size: 0.8rem; color: var(--gray); }
+.footer-bottom { padding-top: 20px; border-top: 1px solid #202024; color: #444; font-size: 0.8rem; }
+
+/* --- RESPONSIVIDADE (MOBILE) --- */
+@media (max-width: 968px) {
+    .hero-wrapper { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+    .hero-text { order: 2; } 
+    .hero-image-container { order: 1; width: 250px; height: 250px; } /* Foto menor no celular */
+    .hero-desc { margin: 0 auto 40px; }
+    .actions { justify-content: center; flex-direction: column; gap: 15px; }
+    .btn-sub { margin-left: 0; }
+}
