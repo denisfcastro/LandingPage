@@ -12,10 +12,10 @@ window.addEventListener('scroll', () => {
 // 2. Efeito de Digitação (Typewriter Effect)
 const textElement = document.querySelector('.typing-text');
 const phrases = [
-    "desenvolvedor Java.", 
-    "especialista em SQL.", 
-    "full Stack Developer.",
-    "apaixonado por Código."
+    "Desenvolvedor Java",      
+    "Full Stack Developer",    
+    "Backend & APIs",           
+    "Focado em Soluções"
 ];
 
 let phraseIndex = 0;
