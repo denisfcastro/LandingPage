@@ -1,4 +1,3 @@
-// 1. Efeito de Navbar Dinâmica (Muda de cor ao rolar)
 const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
@@ -9,7 +8,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// 2. Efeito de Digitação (Typewriter Effect)
 const textElement = document.querySelector('.typing-text');
 const phrases = [
     "Desenvolvedor Java",      
@@ -26,24 +24,21 @@ function typeWriter() {
     const currentPhrase = phrases[phraseIndex];
     
     if (isDeleting) {
-        // Apagando
         textElement.textContent = currentPhrase.substring(0, charIndex - 1);
         charIndex--;
     } else {
-        // Escrevendo
         textElement.textContent = currentPhrase.substring(0, charIndex + 1);
         charIndex++;
     }
 
-    // Velocidade de digitação
     let typeSpeed = isDeleting ? 50 : 100;
 
     if (!isDeleting && charIndex === currentPhrase.length) {
-        // Pausa quando termina de escrever a frase completa
+
         typeSpeed = 2000;
         isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
-        // Passa para a próxima frase
+
         isDeleting = false;
         phraseIndex = (phraseIndex + 1) % phrases.length;
         typeSpeed = 500;
@@ -52,5 +47,4 @@ function typeWriter() {
     setTimeout(typeWriter, typeSpeed);
 }
 
-// Inicia o efeito quando a página carrega
 document.addEventListener('DOMContentLoaded', typeWriter);
